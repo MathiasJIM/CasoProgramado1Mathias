@@ -1,0 +1,59 @@
+﻿@model WebCaso1.Entity.matriculaEntity
+
+@{
+    ViewBag.Title = "RegistrarMatricula";
+}
+
+
+<section class="h-100 h-custom" style="background-color: #fff;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="d-flex justify-content-center">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registrar Matricula</h3>
+                        </div>
+                        @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+                        {
+                            <p class="alert alert-danger">@ViewBag.ErrorMessage</p>
+                        }
+
+                        @if (!string.IsNullOrEmpty(ViewBag.ConfirmationMessage))
+                        {
+                            <p class="alert alert-success">@ViewBag.ConfirmationMessage</p>
+                        }
+
+                        @using (Html.BeginForm("RegistrarMatricula", "Registrar", FormMethod.Post, new { id = "matriculaForm" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control mw-100", required = "required" })
+                            </div>
+                            <div class="form-group">
+                                <label for="monto">Monto</label>
+                                @Html.TextBoxFor(model => model.Monto, new { @class = "form-control mw-100 mt-1", required = "required", type = "number" })
+                            </div>
+                            <div class="form-group">
+                                <label for="TipoCurso">Tipo de Curso</label>
+                                @Html.DropDownListFor(model => model.TipoCurso, new SelectList(
+                                    new List<SelectListItem>
+                                    {
+                                        new SelectListItem { Text = "Seleccione", Value = null, Disabled = true, Selected = true }, // Opción de marcador de posición
+                                        new SelectListItem { Text = "En Laboratorio", Value = "1" },
+                                        new SelectListItem { Text = "En Clase", Value = "2" }
+                                    }, "Value", "Text"), new { @class = "form-control mw-100 mt-1", required = "required" })
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-4">
+                                <button type="submit" class="btn btn-danger btn-lg" id="submitButton">Registrar</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

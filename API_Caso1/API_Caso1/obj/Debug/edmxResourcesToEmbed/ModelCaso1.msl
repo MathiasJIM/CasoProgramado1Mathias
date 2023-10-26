@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CasoEstudioMNModelStoreContainer" CdmEntityContainer="CasoEstudioMNEntities">
+    <EntitySetMapping Name="Estudiantes">
+      <EntityTypeMapping TypeName="CasoEstudioMNModel.Estudiantes">
+        <MappingFragment StoreEntitySet="Estudiantes">
+          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Monto" ColumnName="Monto" />
+          <ScalarProperty Name="TipoCurso" ColumnName="TipoCurso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposCursos">
+      <EntityTypeMapping TypeName="CasoEstudioMNModel.TiposCursos">
+        <MappingFragment StoreEntitySet="TiposCursos">
+          <ScalarProperty Name="TipoCurso" ColumnName="TipoCurso" />
+          <ScalarProperty Name="DescripcionTipoCurso" ColumnName="DescripcionTipoCurso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

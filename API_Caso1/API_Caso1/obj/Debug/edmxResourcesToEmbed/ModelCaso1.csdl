@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CasoEstudioMNModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Estudiantes">
+    <Key>
+      <PropertyRef Name="Consecutivo" />
+    </Key>
+    <Property Name="Consecutivo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Nullable="false" />
+    <Property Name="Monto" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="TipoCurso" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TiposCursos" Relationship="Self.FK_Estudiantes_TiposCursos" FromRole="Estudiantes" ToRole="TiposCursos" />
+  </EntityType>
+  <EntityType Name="TiposCursos">
+    <Key>
+      <PropertyRef Name="TipoCurso" />
+    </Key>
+    <Property Name="TipoCurso" Type="Int32" Nullable="false" />
+    <Property Name="DescripcionTipoCurso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Estudiantes" Relationship="Self.FK_Estudiantes_TiposCursos" FromRole="TiposCursos" ToRole="Estudiantes" />
+  </EntityType>
+  <Association Name="FK_Estudiantes_TiposCursos">
+    <End Role="TiposCursos" Type="Self.TiposCursos" Multiplicity="1" />
+    <End Role="Estudiantes" Type="Self.Estudiantes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposCursos">
+        <PropertyRef Name="TipoCurso" />
+      </Principal>
+      <Dependent Role="Estudiantes">
+        <PropertyRef Name="TipoCurso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CasoEstudioMNEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Estudiantes" EntityType="Self.Estudiantes" />
+    <EntitySet Name="TiposCursos" EntityType="Self.TiposCursos" />
+    <AssociationSet Name="FK_Estudiantes_TiposCursos" Association="Self.FK_Estudiantes_TiposCursos">
+      <End Role="TiposCursos" EntitySet="TiposCursos" />
+      <End Role="Estudiantes" EntitySet="Estudiantes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
